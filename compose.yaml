@@ -1,0 +1,21 @@
+name: local-ai-stack
+
+services:
+  open-webui: 
+    image: ghcr.io/open-webui/open-webui:main
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: ./.config/webui/webui.db
+        target: /app/backend/data/webui.db
+    ports:
+      - 3333:8080
+  searxng: 
+    image: ghcr.io/searxng/searxng:latest
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: ./.config/searxng/settings.yml
+        target: /usr/local/searxng/searx/settings.yml
+    ports:
+      - 8888:8080
