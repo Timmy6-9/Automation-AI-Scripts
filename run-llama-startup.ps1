@@ -1,11 +1,11 @@
 # Check time and day of week to make up for task scheduler's lack of options 
 $now = Get-Date
 
-if ($now.DayOfWeek -in 'Monday','Tuesday','Wednesday','Thursday' -and $now.Hour -ge 9 -and $now.Hour -lt 17) {
+if ($now.DayOfWeek -in 'Monday','Tuesday','Wednesday','Thursday' -and $now.Hour -ge 8 -and $now.Hour -lt 17) {
     Write-Host "Within allowed window - continuing."
 }
 else {
-    Write-Host "Outside allowed window (Mon-Thu, 9am-5pm) - exiting."
+    Write-Host "Outside allowed window (Mon-Thu, 8am-5pm) - exiting."
     Stop-Process -Id $PID
 }
 

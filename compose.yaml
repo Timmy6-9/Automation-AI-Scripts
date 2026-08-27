@@ -4,10 +4,6 @@ services:
   open-webui: 
     image: ghcr.io/open-webui/open-webui:main
     restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./.config/webui/webui.db
-        target: /app/backend/data/webui.db
     ports:
       - 3333:8080
   searxng: 
