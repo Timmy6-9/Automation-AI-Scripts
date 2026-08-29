@@ -36,10 +36,10 @@ if (-not $docker) {
 docker compose up -d
 
 # Once docker is starting, start llama-server
-$llama = Get-Process -Name "llama-server.exe" -ErrorAction SilentlyContinue
+$llama = Get-Process -Name "llama-server" -ErrorAction SilentlyContinue
 if (-not $llama) {
     Set-Location $env:LLAMA_BIN_DIR
-    ./llama-server.exe --no-ui --port 42069 --host 127.0.0.1 --model ./Models/27B/Qwen3.8-27B-UD-Q4_K_S.gguf --alias "Qwen 3.8 27B" `
+    ./llama-server.exe --no-ui --port 42069 --host 127.0.0.1 --model ./Models/27B/Qwen3.8-27B-UD-Q4_K_S.gguf --alias "Qwen 3.8 27B (Small Context)" `
         --ctx-size 120000 --gpu-layers all --load-mode mmap+mlock --cache-type-k q8_0 --cache-type-v q8_0 --parallel 1 --kv-unified --flash-attn on --reasoning-budget 16000 --reasoning-preserve `
             --spec-type draft-mtp,ngram-simple --gpu-layers-draft 0 --spec-draft-n-max 2 --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 48 --spec-ngram-mod-n-max 64 --cache-type-k-draft f16 --cache-type-v-draft f16 `
                 --mmproj ./Models/Vision/mmproj-BF16.gguf --no-mmproj-offload
